@@ -9,6 +9,7 @@ const Signup = () => {
 		lastName: "",
 		email: "",
 		password: "",
+		deviceId:"",
 	});
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Signup = () => {
 					<h1>Welcome Back</h1>
 					<Link to="/login">
 						<button type="button" className={styles.white_btn}>
-							Sing in
+							Sign in
 						</button>
 					</Link>
 				</div>
@@ -82,6 +83,15 @@ const Signup = () => {
 							name="password"
 							onChange={handleChange}
 							value={data.password}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="text"
+							placeholder="Device ID"
+							name="deviceId"
+							onChange={handleChange}
+							value={data.deviceId}
 							required
 							className={styles.input}
 						/>

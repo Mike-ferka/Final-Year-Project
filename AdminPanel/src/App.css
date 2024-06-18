@@ -143,20 +143,79 @@ body {
   border-radius: 5px;
 }
 
+.home_card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.home_card:first-child {
+  background-color: #ff00bf;
+}
+
+.home_card:nth-child(2) {
+  background-color: #ffbf00;
+}
+.home_card:nth-child(3) {
+  background-color: #2e7d32;
+}
+
+.home_card:nth-child(4) {
+  background-color: #d50000;
+}
+
+.home_card:nth-child(5) {
+  background-color: #006666;
+}
+
+/* Define blinking animation */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply blinking animation to text */
+.blink {
+  animation: blink 1s infinite;
+}
+
+
+.card_icon{
+  height: 50px;
+  width: 50px;
+}
+.sensor_icon{
+  height: 20px;
+  width: 20px;
+}
+
 .card:first-child {
-  background-color: #2962ff;
+  background-color:  #660066;
 }
 
 .card:nth-child(2) {
-  background-color: #ff6d00;
+  background-color: #003380;
 }
 
 .card:nth-child(3) {
-  background-color: #2e7d32;
+  background-color: #334d00;
 }
 
 .card:nth-child(4) {
   background-color: #d50000;
+}
+
+.card:nth-child(5) {
+  background-color: brown;
 }
 
 .card-inner {

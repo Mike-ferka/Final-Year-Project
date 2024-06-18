@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-container {
+    padding: 10px;
+  }
+  
+  .main-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .main-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    margin-top: 0;
+  }
+  
+  .charts-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .chart {
+    height: 300px;
+  }
+  
+  .chart h3 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .table-container {
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .crop-yield {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .crop-yield input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .crop-yield button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .crop-yield button:hover {
+    background-color: #0056b3;
+  }
+  
+  .csv-download {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .csv-download .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .csv-download .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .csv-download .btn + .btn {
+    margin-left: 10px;
+  }
+  
+  /* Media Queries for Smaller Screens */
+  @media (max-width: 768px) {
+    .main-cards {
+      grid-template-columns: 1fr;
+    }
+  
+    .charts-container {
+      gap: 10px;
+    }
+  
+    .chart {
+      height: 250px;
+    }
+  
+    .crop-yield {
+      flex-direction: column;
+    }
+  
+    .csv-download .btn {
+      width: 100%;
+      margin: 5px 0;
+    }
+  
+    .chart h3 {
+      font-size: 16px;
+    }
+  }
+  

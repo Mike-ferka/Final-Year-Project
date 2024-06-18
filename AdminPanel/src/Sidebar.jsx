@@ -8,6 +8,7 @@ import
  import { IoNotifications } from "react-icons/io5";
  import { IoHelpCircleOutline } from "react-icons/io5";
  import { AiFillDatabase } from "react-icons/ai";
+ import { Link } from "react-router-dom";
 
 function Sidebar({openSidebarToggle, OpenSidebar}) {
   return (
@@ -21,44 +22,40 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
 
         <ul className='sidebar-list'>
             <li className='sidebar-list-item'>
-                <a href="/">
+                <Link to="/">
                     <BsGrid1X2Fill className='icon'/> Dashboard
-                </a>
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="/sensor">
+                <Link to="/sensor">
                 <MdOutlineSensors className='icon'/> Sensor Overview
-                </a>
+                </Link>
+            </li>
+            
+            <li className='sidebar-list-item'>
+                <Link to="/historical">
+                    <FaDatabase className='icon'/>Download Data
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="/realtime">
-                <FaDatabase className='icon'/>  Real-Time Data
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="/historical">
-                    <FaDatabase className='icon'/> Historical Data
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="/alert">
+                <Link to="/alert">
                 <IoNotifications className='icon'/> Alerts & Notifications
-                </a>
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="/report">
+                <Link to="/report">
                     <BsMenuButtonWideFill className='icon'/> Reports
-                </a>
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="/setting">
+                <Link to="/setting">
                     <BsFillGearFill className='icon'/> Setting
-                </a>
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="/support">
+                <Link to="/support">
                 <IoHelpCircleOutline className='icon'/> Help & Support
-                </a>
+                </Link>
             </li>
         </ul>
     </aside>
