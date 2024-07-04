@@ -1,0 +1,52 @@
+/* Report.css */
+
+/* Ensure the report container adjusts properly next to a sidebar */
+.report-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin-left: 250px; /* Adjust based on your sidebar width */
+    max-width: calc(100% - 250px); /* Adjust based on your sidebar width */
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sensor-item, .notification-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sensor-item:hover, .notification-item:hover {
+    background-color: #f9f9f9;
+}
+
+.sensor-item h3, .notification-item p {
+    margin: 0 0 5px 0;
+}
+
+.sensor-item p, .notification-item small {
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .report-container {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}

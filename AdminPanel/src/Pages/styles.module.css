@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.form_container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.green_btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.success_msg {
+    color: green;
+    margin: 10px 0;
+}
+
+.error_msg {
+    color: red;
+    margin: 10px 0;
+}
+
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px;
+}

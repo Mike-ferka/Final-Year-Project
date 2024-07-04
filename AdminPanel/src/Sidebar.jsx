@@ -34,22 +34,17 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
             
             <li className='sidebar-list-item'>
                 <Link to="/historical">
-                    <FaDatabase className='icon'/>Download Data
+                    <FaDatabase className='icon'/>Sensor Data
+                </Link>
+            </li>
+            <li className='sidebar-list-item'>
+                <Link to="/crop">
+                    <FaDatabase className='icon'/>Crop Yield Data
                 </Link>
             </li>
             <li className='sidebar-list-item'>
                 <Link to="/alert">
-                <IoNotifications className='icon'/> Alerts & Notifications
-                </Link>
-            </li>
-            <li className='sidebar-list-item'>
-                <Link to="/report">
-                    <BsMenuButtonWideFill className='icon'/> Reports
-                </Link>
-            </li>
-            <li className='sidebar-list-item'>
-                <Link to="/setting">
-                    <BsFillGearFill className='icon'/> Setting
+                <IoNotifications className='icon'/> Alerts
                 </Link>
             </li>
             <li className='sidebar-list-item'>

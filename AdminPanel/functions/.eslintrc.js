@@ -22,7 +22,7 @@ module.exports = {
       env: {
         mocha: true,
       },
-      rules: {},
+      rules: {"require-jsdoc": "off"},
     },
   ],
   globals: {},

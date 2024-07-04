@@ -15,7 +15,7 @@ import { CSVLink } from "react-csv";
 
 
 
-function Historical() {
+function Cropyield() {
   const [sensorData, setSensorData] = useState([]);
   const [deviceLocation, setDeviceLocation] = useState({});
   const [deviceStatus, setDeviceStatus] = useState({});
@@ -83,22 +83,6 @@ function Historical() {
     }
   };
 
-  const csvData = sensorData.map((entry) => ({
-    temperature: entry.temperature,
-    humidity: entry.humidity,
-    soilmoisture: entry.soilmoisture,
-    sunlight: entry.sunlight,
-    rain: entry.rain,
-    time: entry.time,
-  }));
-
-  const pieData = [
-    { name: "Temperature", value: sensorData.reduce((acc, entry) => acc + entry.temperature, 0) / sensorData.length },
-    { name: "Humidity", value: sensorData.reduce((acc, entry) => acc + entry.humidity, 0) / sensorData.length },
-    { name: "Soil Moisture", value: sensorData.reduce((acc, entry) => acc + entry.soilmoisture, 0) / sensorData.length },
-    { name: "Sunlight", value: sensorData.reduce((acc, entry) => acc + entry.sunlight, 0) / sensorData.length },
-    { name: "Rain", value: sensorData.reduce((acc, entry) => acc + entry.rain, 0) / sensorData.length },
-  ];
 
   const cropYieldCsvData = Object.keys(cropYields).flatMap(season => 
     Object.keys(cropYields[season]).map(crop => ({
@@ -112,49 +96,58 @@ function Historical() {
 
   return (
     <main className='main-container'>
-      <div className='main-title'>
-      <div className='csv-download'>
-        <CSVLink data={csvData} filename={"sensor_data.csv"} className="btn btn-primary">
-          Download Sensor Data CSV
-        </CSVLink>
-      </div>
-      </div>
 
       <div className='table-container'>
-        <h3>Sensor Data Table</h3>
+        <div className='crop-yield'>
+          <h4>Estimated Crop Yield</h4>
+          <input
+            type="text"
+            value={cropType}
+            onChange={handleCropTypeChange}
+            placeholder="Crop Type"
+          />
+          <input
+            type="text"
+            value={estimatedYield}
+            onChange={handleEstimatedYieldChange}
+            placeholder="Estimated Yield"
+          />
+          <input
+            type="text"
+            value={season}
+            onChange={handleSeasonChange}
+            placeholder="Season"
+          />
+          <button onClick={handleSaveCropYield}>Save</button>
+        </div>
         <table>
           <thead>
             <tr>
-              <th>Temperature</th>
-              <th>Humidity</th>
-              <th>Soil Moisture</th>
-              <th>Sunlight</th>
-              <th>Rain</th>
-              <th>Time of Day</th>
+              <th>Season</th>
+              <th>Crop Type</th>
+              <th>Estimated Yield</th>
             </tr>
           </thead>
           <tbody>
-            {sensorData.map((entry) => (
-              <tr key={entry.timestamp}>
-                <td>{entry.temperature}</td>
-                <td>{entry.humidity}</td>
-                <td>{entry.soilmoisture}</td>
-                <td>{entry.sunlight}</td>
-                <td>{entry.rain}</td>
-                <td>{entry.time}</td>
-              </tr>
-            ))}
+            {Object.keys(cropYields).map(season => 
+              Object.keys(cropYields[season]).map(crop => (
+                <tr key={`${season}-${crop}`}>
+                  <td>{season}</td>
+                  <td>{crop}</td>
+                  <td>{cropYields[season][crop]}</td>
+                </tr>
+              ))
+            )}
           </tbody>
-        
         </table>
       </div>
       <div className='csv-download'>
-        <CSVLink data={csvData} filename={"sensor_data.csv"} className="btn btn-primary">
-          Download Sensor Data CSV
+        <CSVLink data={cropYieldCsvData} filename={"crop_yield_data.csv"} className="btn btn-primary" style={{ marginLeft: "20px" }}>
+          Download Crop Yield Data CSV
         </CSVLink>
       </div>
     </main>
   );
 }
 
-export default Historical;
+export default Cropyield;

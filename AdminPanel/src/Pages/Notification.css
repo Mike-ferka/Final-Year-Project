@@ -1,0 +1,53 @@
+/* Notification.css */
+.notification-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 10px 10px;
+    padding: 20px;
+    border-radius: 8px;
+    border: whitesmoke solid;
+    
+  }
+  
+  .notification-container h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .notification-message {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notification-message:last-child {
+    border-bottom: none;
+  }
+  
+  .notification-message.alert {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Media queries for smaller screens */
+  @media (max-width: 768px) {
+    .notification-container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .notification-message {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .notification-container {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .notification-message {
+      font-size: 12px;
+    }
+  }
+  

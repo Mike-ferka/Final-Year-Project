@@ -10,12 +10,11 @@ import { Dashboard } from './Dashboard'
 //pages import
 import Home from './Home'
 import Sensors from './Pages/Sensors'
-import Realtime from './Pages/Realtime'
+import Cropyield from './Pages/Cropyield'
 import Historical from './Pages/Historical'
 import Reports from './Pages/Reports'
-import Setting from './Pages/Setting'
 import Support from'./Pages/Support'
-import Alerts from './Pages/Alerts'
+import Notification from './Pages/Alerts'
 import Notfund from './Pages/Notfund';
 
 function App() {
@@ -28,11 +27,9 @@ function App() {
       {user && <Route path="/" exact element={<Dashboard/>} >
       <Route path="/" element={<Home/>} />
             <Route path="/sensor" element={<Sensors/>} />
-            <Route path="/realtime" element={<Realtime/>} />
             <Route path="/historical" element={<Historical/>} />
-            <Route path="/alert" element={<Alerts/>} />
-            <Route path="/report" element={<Reports/>} />
-            <Route path="/setting" element={<Setting/>} />
+            <Route path="/crop" element={<Cropyield/>} />
+            <Route path="/alert" element={<Notification/>} />
             <Route path="/support" element={<Support/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         <Route/>

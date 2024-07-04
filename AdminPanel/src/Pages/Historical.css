@@ -7,6 +7,10 @@ body {
 .main-container {
   padding: 10px;
 }
+.main-container h3{
+  color: #f2f2f2;
+}
+.main-container h1{color: aliceblue;}
 
 .main-title {
   text-align: center;
