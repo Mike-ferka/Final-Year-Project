@@ -31,14 +31,18 @@ const Notification = () => {
           const newNotifications = [];
 
           for (let sensor in latestData) {
-            if (latestData[sensor] < thresholds[sensor].min) {
-              newNotifications.push(
-                `<IoIosNotifications />: ${sensor} reading ${latestData[sensor]} at time ${latestTimestamp} is too low!`
-              );
-            } else if (latestData[sensor] > thresholds[sensor].max) {
-              newNotifications.push(
-                `Alert: ${sensor} reading ${latestData[sensor]} at time ${latestTimestamp} is too high!`
-              );
+            if (thresholds[sensor]) { // Check if sensor exists in thresholds
+              if (latestData[sensor] < thresholds[sensor].min) {
+                newNotifications.push(
+                  `Alert: ${sensor} reading ${latestData[sensor]} at time ${latestTimestamp} is too low!`
+                );
+              } else if (latestData[sensor] > thresholds[sensor].max) {
+                newNotifications.push(
+                  `Alert: ${sensor} reading ${latestData[sensor]} at time ${latestTimestamp} is too high!`
+                );
+              }
+            } else {
+              console.warn(`No thresholds defined for sensor: ${sensor}`);
             }
           }
 
@@ -60,10 +64,10 @@ const Notification = () => {
 
   return (
     <div className="notification-container">
-       <h3><IoIosNotifications /></h3>
+      <h3><IoIosNotifications /></h3>
       {notifications.length > 0 ? (
         notifications.map((notification, index) => (
-           <p key={index} className="notification-message alert">{notification}</p>
+          <p key={index} className="notification-message alert">{notification}</p>
         ))
       ) : (
         <p className="notification-message">No alerts</p>
