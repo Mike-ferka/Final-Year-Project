@@ -90,6 +90,7 @@ function Historical() {
     sunlight: entry.sunlight,
     rain: entry.rain,
     time: entry.time,
+    date: entry.date,
   }));
 
   const pieData = [
@@ -127,10 +128,11 @@ function Historical() {
             <tr>
               <th>Temperature</th>
               <th>Humidity</th>
-              <th>Soil Moisture</th>
-              <th>Sunlight</th>
-              <th>Rain</th>
+              <th>Soil Moisture_100%</th>
+              <th>Sunlight_100%</th>
+              <th>Rain_100%</th>
               <th>Time of Day</th>
+               <th>Date</th>
             </tr>
           </thead>
           <tbody>
@@ -142,6 +144,7 @@ function Historical() {
                 <td>{entry.sunlight}</td>
                 <td>{entry.rain}</td>
                 <td>{entry.time}</td>
+                <td>{entry.date}</td>
               </tr>
             ))}
           </tbody>
