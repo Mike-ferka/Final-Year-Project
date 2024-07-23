@@ -15,7 +15,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
     <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
         <div className='sidebar-title'>
             <div className='sidebar-brand'>
-            <AiFillDatabase  className='icon_header'/> AGRIDATA
+            <AiFillDatabase  className='icon_header'/>FarmSense
             </div>
             <span className='icon close_icon' onClick={OpenSidebar}>X</span>
         </div>
