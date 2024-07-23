@@ -10,7 +10,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell
 } from 'recharts';
 import { useEffect, useState } from "react";
-import { ref, get, child, set } from "firebase/database";
+import { ref, get, query, orderByKey, limitToLast } from "firebase/database";
 import { database } from "./firebase"; // Adjust the path as per your directory structure
 import { CSVLink } from "react-csv";
 
@@ -40,23 +40,30 @@ function Home() {
           setDeviceLocation(userDevices.DeviceLocation || {});
           setDeviceStatus(userDevices.SensorStatus || {});
           setCropYields(userDevices.cropYields || {});
-          const readings = userDevices.sensorReadings 
-            ? Object.keys(userDevices.sensorReadings).map(key => ({
-                ...userDevices.sensorReadings[key],
-                timestamp: key
-              }))
-              
-            : [];
-          setSensorData(readings);
         }
       }).catch((error) => {
         console.error("Error fetching user devices:", error);
       });
+
+      const sensorReadingsRef = query(
+        ref(database, `users/${userId}/sensorReadings`),
+        orderByKey(),
+        limitToLast(200)
+      );
+
+      get(sensorReadingsRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const readings = Object.keys(snapshot.val()).map(key => ({
+            ...snapshot.val()[key],
+            timestamp: key
+          }));
+          setSensorData(readings);
+        }
+      }).catch((error) => {
+        console.error("Error fetching sensor readings:", error);
+      });
     }
   }, [userId]);
-
- 
-
 
   // Get the latest sensor data
   const latestSensorData = sensorData.length ? sensorData[sensorData.length - 1] : {};
@@ -143,8 +150,6 @@ function Home() {
           </div>
         </div>
       </div>
-
-    
     </main>
   );
 }
