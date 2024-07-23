@@ -48,7 +48,7 @@ function Home() {
       const sensorReadingsRef = query(
         ref(database, `users/${userId}/sensorReadings`),
         orderByKey(),
-        limitToLast(200)
+        limitToLast(300)
       );
 
       get(sensorReadingsRef).then((snapshot) => {
@@ -78,31 +78,31 @@ function Home() {
           <div className='card-inner'>
             <h3>TEMPERATURE </h3>
           </div>
-          <h1>{latestSensorData.temperature ?? 'N/A'} <WiCelsius /></h1>
+          <h1>{latestSensorData.temperature ?? 'fetching..'} <WiCelsius /></h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
             <h3>HUMIDITY</h3>
           </div>
-          <h1>{latestSensorData.humidity ?? 'N/A'}  <WiHumidity/></h1>
+          <h1>{latestSensorData.humidity ?? 'fetching..'}  <WiHumidity/></h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
             <h3>SOIL MOISTURE</h3>
           </div>
-          <h1>{latestSensorData.soilmoisture ?? 'N/A'} <BsMoisture/></h1>
+          <h1>{latestSensorData.soilmoisture ?? 'fetching..'} <BsMoisture/></h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
             <h3>SUNLIGHT</h3>
           </div>
-          <h1>{latestSensorData.sunlight ?? 'N/A'} <WiDaySunny/></h1>
+          <h1>{latestSensorData.sunlight ?? 'fetching..'} <WiDaySunny/></h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
             <h3>RAIN</h3>
           </div>
-          <h1>{latestSensorData.rain ?? 'N/A'} <WiDayRainMix/></h1>
+          <h1>{latestSensorData.rain ?? 'fetching..'} <WiDayRainMix/></h1>
         </div>
       </div>
 
