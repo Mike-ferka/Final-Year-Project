@@ -8,12 +8,10 @@ import { WiDayRainMix, WiBarometer, WiHail } from "react-icons/wi";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell
 } from 'recharts';
- import { useEffect, useState } from "react";
-import { ref, get, child,set } from "firebase/database";
+import { useEffect, useState } from "react";
+import { ref, get, child, set } from "firebase/database";
 import { database } from "../firebase"; // Adjust the path as per your directory structure
 import { CSVLink } from "react-csv";
-
-
 
 function Cropyield() {
   const [sensorData, setSensorData] = useState([]);
@@ -24,6 +22,8 @@ function Cropyield() {
   const [cropType, setCropType] = useState("");
   const [estimatedYield, setEstimatedYield] = useState("");
   const [season, setSeason] = useState("");
+  const [cropYear, setCropYear] = useState("");
+  const [fertilizerOrPesticide, setFertilizerOrPesticide] = useState("");
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -67,15 +67,30 @@ function Cropyield() {
     setSeason(e.target.value);
   };
 
+  const handleCropYearChange = (e) => {
+    setCropYear(e.target.value);
+  };
+
+  const handleFertilizerOrPesticideChange = (e) => {
+    setFertilizerOrPesticide(e.target.value);
+  };
+
   const handleSaveCropYield = () => {
-    if (userId && cropType && season) {
+    if (userId && cropType && season && cropYear && fertilizerOrPesticide) {
       const path = `users/${userId}/cropYields/${season}/${cropType}`;
-      set(ref(database, path), estimatedYield)
+      const cropData = {
+        estimatedYield,
+        cropYear,
+        fertilizerOrPesticide
+      };
+      set(ref(database, path), cropData)
         .then(() => {
-          setCropYields({ ...cropYields, [season]: { ...cropYields[season], [cropType]: estimatedYield } });
+          setCropYields({ ...cropYields, [season]: { ...cropYields[season], [cropType]: cropData } });
           setCropType("");
           setEstimatedYield("");
           setSeason("");
+          setCropYear("");
+          setFertilizerOrPesticide("");
         })
         .catch((error) => {
           console.error("Error updating crop yield:", error);
@@ -83,20 +98,18 @@ function Cropyield() {
     }
   };
 
-
   const cropYieldCsvData = Object.keys(cropYields).flatMap(season => 
     Object.keys(cropYields[season]).map(crop => ({
       season,
       crop,
-      estimatedYield: cropYields[season][crop]
+      estimatedYield: cropYields[season][crop].estimatedYield,
+      cropYear: cropYields[season][crop].cropYear,
+      fertilizerOrPesticide: cropYields[season][crop].fertilizerOrPesticide
     }))
   );
 
-  const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE"];
-
   return (
     <main className='main-container'>
-
       <div className='table-container'>
         <div className='crop-yield'>
           <h4>Estimated Crop Yield</h4>
@@ -118,6 +131,18 @@ function Cropyield() {
             onChange={handleSeasonChange}
             placeholder="Season"
           />
+          <input
+            type="text"
+            value={cropYear}
+            onChange={handleCropYearChange}
+            placeholder="Crop Year"
+          />
+          <input
+            type="text"
+            value={fertilizerOrPesticide}
+            onChange={handleFertilizerOrPesticideChange}
+            placeholder="Fertilizer or Pesticide Used"
+          />
           <button onClick={handleSaveCropYield}>Save</button>
         </div>
         <table>
@@ -126,6 +151,8 @@ function Cropyield() {
               <th>Season</th>
               <th>Crop Type</th>
               <th>Estimated Yield</th>
+              <th>Crop Year</th>
+              <th>Fertilizer or Pesticide Used</th>
             </tr>
           </thead>
           <tbody>
@@ -134,7 +161,9 @@ function Cropyield() {
                 <tr key={`${season}-${crop}`}>
                   <td>{season}</td>
                   <td>{crop}</td>
-                  <td>{cropYields[season][crop]}</td>
+                  <td>{cropYields[season][crop].estimatedYield}</td>
+                  <td>{cropYields[season][crop].cropYear}</td>
+                  <td>{cropYields[season][crop].fertilizerOrPesticide}</td>
                 </tr>
               ))
             )}
