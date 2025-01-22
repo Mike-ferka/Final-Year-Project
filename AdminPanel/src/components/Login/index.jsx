@@ -2,9 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { database } from "../../firebase"; // Adjust the path as per your directory structure
+import { database } from "../../firebase";
 import { ref, set } from "firebase/database";
-
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "", deviceId: "" });
@@ -13,15 +12,15 @@ const Login = () => {
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
-	
-function myFunction() {
-   var x = document.getElementById("myInput");
-    if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+
+	const myFunction = () => {
+		const x = document.getElementById("myInput");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -29,18 +28,21 @@ function myFunction() {
 			const url = "https://final-year-projet-backend.onrender.com/api/auth";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
-			localStorage.setItem("deviceId", data.deviceId); // Store deviceId
+			localStorage.setItem("deviceId", data.deviceId);
 
-			 // Update Firebase with the deviceId under the userId
-			 const userId = res.userId; // The response contains userId
-			 localStorage.setItem("userId",userId);//store userId
-			 
-			 if (userId && data.deviceId) {
-				 console.log("Updating Firebase with:", { userId, deviceId: data.deviceId });
-				 const firebaseRef = ref(database, `users/${userId}/deviceId`);
-				 await set(firebaseRef, data.deviceId);
-				 console.log("Firebase update successful");
-			 }
+			const userId = res.userId;
+			localStorage.setItem("userId", userId);
+
+			if (userId && data.deviceId) {
+				console.log("Updating Firebase with:", { userId, deviceId: data.deviceId });
+				try {
+					const firebaseRef = ref(database, `users/${userId}/deviceId`);
+					await set(firebaseRef, data.deviceId);
+					console.log("Firebase update successful");
+				} catch (firebaseError) {
+					console.error("Failed to update Firebase:", firebaseError);
+				}
+			}
 
 			window.location = "/";
 		} catch (error) {
@@ -77,13 +79,12 @@ function myFunction() {
 							value={data.password}
 							required
 							className={styles.input}
-							value="FakePSW"
 							id="myInput"
 						/>
-					
-                                               <input 
-						       type="checkbox" 
-						       onclick="myFunction()">Show Password
+						<input
+							type="checkbox"
+							onClick={myFunction}
+						/> Show Password
 						<input
 							type="text"
 							placeholder="Device ID"
@@ -100,7 +101,7 @@ function myFunction() {
 					</form>
 				</div>
 				<div className={styles.right}>
-					<h1>New Here ?</h1>
+					<h1>New Here?</h1>
 					<Link to="/signup">
 						<button type="button" className={styles.white_btn}>
 							Sign Up
