@@ -80,7 +80,7 @@ function myFunction() {
 							value="FakePSW"
 							id="myInput"
 						/>
-						<!-- An element to toggle between password visibility -->
+					
                                                <input 
 						       type="checkbox" 
 						       onclick="myFunction()">Show Password
