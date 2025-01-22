@@ -84,6 +84,7 @@ const Login = () => {
 						<input
 							type="checkbox"
 							onClick={myFunction}
+							className={styles.input}
 						/> Show Password
 						<input
 							type="text"
