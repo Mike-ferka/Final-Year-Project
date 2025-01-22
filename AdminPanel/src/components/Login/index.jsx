@@ -13,6 +13,15 @@ const Login = () => {
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
+	
+function myFunction() {
+   var x = document.getElementById("myInput");
+    if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -68,7 +77,13 @@ const Login = () => {
 							value={data.password}
 							required
 							className={styles.input}
+							value="FakePSW"
+							id="myInput"
 						/>
+						<!-- An element to toggle between password visibility -->
+                                               <input 
+						       type="checkbox" 
+						       onclick="myFunction()">Show Password
 						<input
 							type="text"
 							placeholder="Device ID"
